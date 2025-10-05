@@ -8,7 +8,6 @@ import LoginForm from '@/component/LoginForm'
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-stone-900 via-amber-900 to-yellow-800 text-white">
-      {/* Navbar */}
       <Navbar />
 
       {/* Hero Section */}
@@ -22,14 +21,13 @@ export default function Home() {
           Silakan login untuk mulai menggunakan sistem.
         </p>
 
-        {/* Satu Form Login */}
+        {/* Form Login */}
         <div className="w-full max-w-md bg-white/10 p-6 rounded-lg border border-white/20 shadow-lg">
           <h2 className="text-xl font-semibold mb-4 text-center">Login ke Sistem</h2>
           <LoginForm />
         </div>
       </main>
 
-      {/* Footer */}
       <Footer />
     </div>
   )

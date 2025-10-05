@@ -12,10 +12,10 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             {/* Logo */}
             <div className="flex items-center gap-2">
-            <Coffee size={28} className="text-amber-400 drop-shadow" />
-            <span className="text-2xl font-extrabold tracking-wide bg-gradient-to-r from-amber-400 to-yellow-200 bg-clip-text text-transparent">
-                KopiKita
-            </span>
+                <Coffee size={28} className="text-amber-400 drop-shadow" />
+                <span className="text-2xl font-extrabold tracking-wide bg-gradient-to-r from-amber-400 to-yellow-200 bg-clip-text text-transparent">
+                    KopiKita
+                </span>
             </div>
 
             {/* Desktop Menu */}

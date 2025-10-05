@@ -23,15 +23,16 @@ export default function LoginForm() {
         })
 
         const data = await res.json()
-
         if (!res.ok) throw new Error(data.message || 'Login gagal')
 
-        // Simpan token
+        // Simpan token & user
         localStorage.setItem('token', data.access_token)
+        if (data.user) localStorage.setItem('user', JSON.stringify(data.user))
 
         // Redirect sesuai role
-        if (data.role === 'ADMIN') router.push('/admin')
-        else if (data.role === 'KASIR') router.push('/kasir')
+        const role = data.user?.role || data.role
+        if (role === 'ADMIN') router.push('/admin')
+        else if (role === 'KASIR') router.push('/kasir')
         else router.push('/')
 
         } catch (err: any) {
@@ -43,30 +44,30 @@ export default function LoginForm() {
 
     return (
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="px-4 py-2 rounded-md bg-white/20 placeholder-white/70 text-white focus:outline-none"
-            />
-            <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="px-4 py-2 rounded-md bg-white/20 placeholder-white/70 text-white focus:outline-none"
-            />
-            {error && <p className="text-red-400 text-sm">{error}</p>}
-            <button
-                type="submit"
-                disabled={loading}
-                className="px-4 py-2 bg-amber-500 hover:bg-amber-600 rounded-md font-semibold text-white transition-all"
-            >
-                {loading ? 'Memproses...' : 'Login'}
-            </button>
+        <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="px-4 py-2 rounded-md bg-white/20 placeholder-white/70 text-white focus:outline-none"
+        />
+        <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className="px-4 py-2 rounded-md bg-white/20 placeholder-white/70 text-white focus:outline-none"
+        />
+        {error && <p className="text-red-400 text-sm">{error}</p>}
+        <button
+            type="submit"
+            disabled={loading}
+            className="px-4 py-2 bg-amber-500 hover:bg-amber-600 rounded-md font-semibold text-white transition-all"
+        >
+            {loading ? 'Memproses...' : 'Login'}
+        </button>
         </form>
     )
 }
